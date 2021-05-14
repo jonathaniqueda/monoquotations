@@ -1,0 +1,56 @@
+{
+  "env": {
+    "browser": false,
+    "es6": true,
+    "node": true
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "tsconfig.json",
+    "sourceType": "module"
+  },
+  "plugins": [
+    "@typescript-eslint",
+    "jest",
+    "eslint-plugin-security"
+  ],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:jest/recommended",
+    "plugin:security/recommended",
+    "prettier"
+  ],
+  "ignorePatterns": ["newrelic.js", "deploy"],
+  "rules": {
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "max-len": [
+      2,
+      {
+        "code": 100,
+        "ignorePattern": "import|implements|inject",
+        "ignoreStrings": true,
+        "ignoreUrls": true,
+        "ignoreTrailingComments": true
+      }
+    ],
+    "prefer-arrow-callback": 0,
+    "func-names": 0,
+    "newline-before-return": 2,
+    "no-unsafe-innerhtml/no-unsafe-innerhtml": 2,
+    "security/detect-non-literal-fs-filename": 2,
+    "security/detect-non-literal-regexp": 2,
+    "security/detect-unsafe-regex": 2,
+    "security/detect-buffer-noassert": 2,
+    "security/detect-child-process": 2,
+    "security/detect-disable-mustache-escape": 2,
+    "security/detect-eval-with-expression": 2,
+    "security/detect-no-csrf-before-method-override": 2,
+    "security/detect-non-literal-require": 2,
+    "security/detect-object-injection": 2,
+    "security/detect-possible-timing-attacks": 1,
+    "security/detect-pseudoRandomBytes": 2
+  }
+}
