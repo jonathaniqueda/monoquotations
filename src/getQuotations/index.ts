@@ -1,16 +1,11 @@
-// import logger from './logger';
-// import initConfig from './client/ssm';
-// import Entries from './config/enum';
+import { initializeApp } from './app';
+import { Context } from 'aws-lambda';
+import awsServerlessExpress from 'aws-serverless-express';
 
-export const handler = async (event: any): Promise<void> => {
-  // logger().info('[info]: initializing...');
+const server = awsServerlessExpress.createServer(initializeApp());
 
-  // await initConfig(Object.values(Entries));
-  // logger().info('[info]: config loaded');
-
-  const app = await import('./app');
-
-  return app.handler(event);
+export const handler = async (event: any, context: Context) => {
+  return awsServerlessExpress.proxy(server, event, context);
 };
 
 export default {
