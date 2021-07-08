@@ -1,0 +1,5 @@
+
+
+docker build -f Dockerfile -t baseimage .
+docker build -f Dockerfile -t ${SERVICE_NAME} .
+docker run --rm -e PORT=${PORT} -p ${PORT}:${PORT} ${SERVICE_NAME}

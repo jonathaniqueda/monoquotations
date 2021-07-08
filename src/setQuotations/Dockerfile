@@ -11,5 +11,7 @@ RUN lerna bootstrap --scope 'set-quotation' --hoist
 
 WORKDIR /app/src/setQuotation
 
-EXPOSE 3002
-CMD ["npm", "run", "start"]
+CMD ["npm", "run", "build"]
+
+#EXPOSE 3002
+#CMD ["npm", "run", "start"]
