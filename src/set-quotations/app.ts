@@ -10,5 +10,11 @@ export const initializeApp = () => {
     res.sendStatus(200);
   });
 
+  app.post('/', (req: Request, res: Response) => {
+    req.body;
+
+    res.sendStatus(200);
+  });
+
   return app;
 };
