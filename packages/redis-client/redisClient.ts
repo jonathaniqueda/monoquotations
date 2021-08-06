@@ -1,15 +1,25 @@
 import redis, { ClientOpts } from 'redis';
 import { promisify } from 'util';
-import settings from './settings';
 
-const fiveMinutes = 3000;
-
+type ConnectionOptions = {
+  cache: {
+    port: number,
+    host: string,
+    db?: number,
+    password?: string,
+    ttl?: number
+  }
+}
 type GetRedisClientOptions = Pick<ClientOpts, 'db'>;
 
-function getRedisClient(clientOpts: GetRedisClientOptions = {}) {
+const getRedisClient = (
+  conn: ConnectionOptions,
+  clientOpts: GetRedisClientOptions = {}
+) => {
   const client = redis.createClient({
-    host: settings.cache.host,
-    port: settings.cache.port,
+    host: conn.cache.host,
+    port: conn.cache.port,
+    db: conn.cache.db,
     // eslint-disable-next-line @typescript-eslint/naming-convention
     no_ready_check: true,
     // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -58,8 +68,11 @@ interface ICacheProvider {
 class RedisCache implements ICacheProvider {
   client: any;
 
-  constructor(params: GetRedisClientOptions = {}) {
-    this.client = getRedisClient(params);
+  constructor(
+    conn: ConnectionOptions,
+    params: GetRedisClientOptions = {}
+  ) {
+    this.client = getRedisClient(conn, params);
 
     if (this.client.instance.on) {
       this.client.instance.on('error', (err: Error) =>
@@ -68,8 +81,8 @@ class RedisCache implements ICacheProvider {
     }
   }
 
-  set(key: string, value: Record<string, unknown>, expiration = settings.cache.ttl || fiveMinutes) {
-    return this.client.set(key, expiration, JSON.stringify(value));
+  set(key: string, value: Record<string, unknown>) {
+    return this.client.set(key, JSON.stringify(value));
   }
 
   async get(key: string) {

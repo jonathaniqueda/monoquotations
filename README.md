@@ -18,9 +18,9 @@ Pré-req: monorepo de lambda functions dockerizado.
 Cenário: suponhamos que entrega de valores de cotação fosse feita de uma maneira diferente. Em um cenário simples e ideal, existe um mundo onde um provider externo envia via webhook (POST request) uma cotação para a Remessa Online toda vez que ela muda contendo o seguinte JSON:
 {
   "fromCurrency": "USD",
-   "toCurrency": "BRL",
-   "quotation": "5,50",
-   "changedAt": "2021-05-05T08:00:00"
+  "toCurrency": "BRL",
+  "quotation": "5,50",
+  "changedAt": "2021-05-05T08:00:00"
 }
 Do lado de tecnologia da RemessaOnline existe um lambda com express ou algum outro server por cima que será responsável por receber esse webhook, contendo apenas uma única rota POST /webhook. (Set quotations)
 Fechando o ciclo de recebimento de cotação e entrando no ciclo de entrega dessa cotação para o usuário, a RemessaOnline irá possuir um outro lambda responsável por receber a moeda de entrada, a moeda de saída e valor final convertido. Esse lambda possui um server por cima também e responde apenas uma única rota GET /quotation e os parâmetros necessários para o processamento. (Get quotations)

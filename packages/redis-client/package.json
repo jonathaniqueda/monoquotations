@@ -1,0 +1,30 @@
+{
+  "name": "@packages/redis",
+  "version": "1.1.0",
+  "description": "Redis",
+  "private": false,
+  "main": "redisClient.ts",
+  "scripts": {
+    "lint:base": "tslint --project tsconfig.json --config tslint.json *.ts",
+    "lint": "npm run lint:base *.ts",
+    "precommit": "lint-staged"
+  },
+  "keywords": [
+    "joi",
+    "typescript"
+  ],
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "@types/body-parser": "^1.19.1",
+    "@types/redis": "^2.8.31"
+  },
+  "lint-staged": {
+    "*.ts": [
+      "npm run lint:base"
+    ]
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "redis": "^3.1.2"
+  }
+}

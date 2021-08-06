@@ -1,0 +1,32 @@
+{
+  "name": "@packages/schema-validator",
+  "version": "1.1.0",
+  "description": "Schema validator",
+  "private": false,
+  "main": "validateSchema.ts",
+  "scripts": {
+    "lint:base": "tslint --project tsconfig.json --config tslint.json *.ts",
+    "lint": "npm run lint:base *.ts",
+    "precommit": "lint-staged"
+  },
+  "keywords": [
+    "joi",
+    "typescript"
+  ],
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "@types/body-parser": "^1.19.1",
+    "@types/joi": "^17.2.3",
+    "lint-staged": "^7.1.0"
+  },
+  "lint-staged": {
+    "*.ts": [
+      "npm run lint:base"
+    ]
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "joi": "^17.4.0",
+    "typescript": "~4.2.2"
+  }
+}
