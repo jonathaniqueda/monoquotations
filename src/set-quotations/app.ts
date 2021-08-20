@@ -3,6 +3,7 @@ import Joi from 'joi';
 import validateSchema from '@packages/schema-validator';
 import { RedisCache } from '@packages/redis-client';
 import settings from './settings';
+import { quotationKey }  from '@packages/utils';
 
 export const initializeApp = () => {
   const app = express();
@@ -33,7 +34,7 @@ export const initializeApp = () => {
         cache: settings.cache
       });
       await redisClient.set(
-      `${body.fromCurrency}_${body.toCurrency}`, {
+        quotationKey(body.fromCurrency, body.toCurrency), {
         fromCurrency: body.fromCurrency,
         toCurrency: body.toCurrency,
         quotation: body.quotation,

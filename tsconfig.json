@@ -21,6 +21,7 @@
   "include": [
     "index.ts",
     "./src/**/*",
+    "./packages/**/*",
     "./test/**/*",
     "./jest.config.ts",
     "./jest-functional.config.ts"
